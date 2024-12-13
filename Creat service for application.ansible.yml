@@ -1,0 +1,33 @@
+- name: Ensure CW2 Server service is running
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Copy CW2 Server service file
+      copy:
+        dest: /etc/systemd/system/cw2-server.service
+        content: |
+          [Unit]
+          Description=CW2 Server
+          After=network.target
+
+          [Service]
+          ExecStart=/usr/bin/cw2-server
+          Restart=always
+          User=nobody
+          Group=nogroup
+          Environment=PATH=/usr/bin:/usr/local/bin
+          Environment=NODE_ENV=production
+          WorkingDirectory=/usr/local/cw2-server
+
+          [Install]
+          WantedBy=multi-user.target
+
+    - name: Reload systemd to apply changes
+      command: systemctl daemon-reload
+
+    - name: Enable CW2 Server service
+      systemd:
+        name: cw2-server
+        enabled: yes
+        state: started
