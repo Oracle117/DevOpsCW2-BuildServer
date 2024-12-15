@@ -21,13 +21,29 @@ pipeline {
                                 '''
                         }
                 }
+
+
+
                 stage('login') {
                         steps {
                                 sh 'echo $DOCKERHUB_CREDS_PSW docker login -u $DOCKERHUB_CREDS_USR --password-stdin'
                         }
                 }
-                stage('deploy') {
+
+                stage ('push') {
                         steps {
-                                sshagent(['jenkins-k8s-ssh-key']) {
+                                ssh 'docker push oracle117/cw2-server:0.1'
+//              stage('deploy') {
+//                      steps {
+//                              sshagent(['my-ssh-key']) {
+//                                      sh 'scp /Users/oracle117/home/aws/'
+//                              }
+//                      }
+                }
+        }
+}
+
+
+
 
 
