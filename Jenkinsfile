@@ -37,8 +37,9 @@ pipeline {
 //                      steps {
 //                              sshagent(['my-ssh-key']) {
 //                                      sh 'scp /Users/oracle117/home/aws/'
+//                                      }
 //                              }
-//                      }
+                        }
                 }
         }
 }
