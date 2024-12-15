@@ -1,7 +1,7 @@
 // jenkinsfile
 pipeline {
         agent any
-        enviroment {
+        environment {
                 DOCKERHUB_CREDS = credentials('docker')
         }
         stages {
@@ -32,7 +32,7 @@ pipeline {
 
                 stage ('push') {
                         steps {
-                                ssh 'docker push oracle117/cw2-server:0.1'
+                                sh 'docker push oracle117/cw2-server:0.1'
 //              stage('deploy') {
 //                      steps {
 //                              sshagent(['my-ssh-key']) {
