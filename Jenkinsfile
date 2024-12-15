@@ -7,7 +7,8 @@ pipeline {
         stages {
                 stage ('docker image build') {
                         steps {
-                                sh 'docker build --tag oracle117/cw2-server:0.1'
+                                echo ' building image'
+                                sh 'docker build --tag oracle117/cw2-server:0.1 .'
                         }
                 }
                 stage ('test image') {
